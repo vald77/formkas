@@ -479,3 +479,88 @@ tbody tr:hover {
     flex-direction: column;
   }
 }
+
+/* Tampilan untuk HP (max 600px) */
+@media (max-width: 600px) {
+  /* Sidebar jadi baris horizontal di atas */
+  .sidebar {
+    flex-direction: row;
+    width: 100%;
+    padding: 10px;
+    overflow-x: auto;
+    justify-content: space-around;
+  }
+
+  .brand {
+    font-size: 1rem;
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+
+  .sidebar nav {
+    display: flex;
+    gap: 5px;
+    flex: 1;
+    justify-content: space-around;
+  }
+
+  .sidebar nav a {
+    font-size: 0.8rem;
+    padding: 8px;
+    margin: 0;
+  }
+
+  /* Konten utama */
+  .content {
+    padding: 12px;
+  }
+
+  .header h1 {
+    font-size: 1.3rem;
+  }
+
+  .header p {
+    font-size: 0.85rem;
+  }
+
+  /* Form jadi 1 kolom penuh */
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  /* Tabel responsif */
+  table {
+    font-size: 0.8rem;
+  }
+
+  th, td {
+    padding: 6px;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  /* Rekap card ditumpuk vertikal */
+  .rekap-cards {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rekap-card {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+}

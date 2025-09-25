@@ -1,89 +1,37 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f4f4f4;
-  color: #333;
-}
-
-header {
-  background: #0077cc;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
-
-main {
-  padding: 20px;
-}
-
-h2 {
-  color: #0077cc;
-  margin-bottom: 10px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 400px;
-  margin-bottom: 20px;
-}
-
-input, select, button {
-  padding: 10px;
-  font-size: 16px;
-}
-
-button {
-  background: #0077cc;
-  color: #fff;
+/* Tombol kecil di tabel */
+.table-btn {
+  padding: 5px 10px;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
+  font-size: 12px;
 }
 
-button:hover {
-  background: #005fa3;
+.btn-edit {
+  background: #ffc107;
+  color: #000;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-table, th, td {
-  border: 1px solid #ccc;
-}
-
-th, td {
-  padding: 10px;
-  text-align: center;
-}
-
-tr:nth-child(even) {
-  background: #f9f9f9;
-}
-
-.status-sudah {
-  color: green;
-  font-weight: bold;
-}
-
-.status-belum {
-  color: red;
-  font-weight: bold;
-}
-
-p b {
-  font-size: 18px;
-  color: #0077cc;
-}
-
-footer {
-  text-align: center;
-  background: #333;
+.btn-delete {
+  background: #dc3545;
   color: #fff;
-  padding: 10px;
-  margin-top: 20px;
+}
+
+.btn-edit:hover {
+  background: #e0a800;
+}
+
+.btn-delete:hover {
+  background: #c82333;
+}
+
+/* Pencarian */
+#searchInput {
+  padding: 8px;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+.hidden {
+  display: none;
 }

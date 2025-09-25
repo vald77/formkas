@@ -1,16 +1,15 @@
-// Data Iuran
 let dataIuran = JSON.parse(localStorage.getItem("kasData")) || [];
 
-// Elemen
 const form = document.getElementById("iuranForm");
 const tabelBody = document.querySelector("#tabelIuran tbody");
 const totalKas = document.getElementById("totalKas");
+const totalSudah = document.getElementById("totalSudah");
+const totalBelum = document.getElementById("totalBelum");
 const rekapChartCtx = document.getElementById("rekapChart").getContext("2d");
 const searchInput = document.getElementById("searchInput");
 
 let chart;
 
-// Render Tabel
 function renderTabel(filter = "") {
   tabelBody.innerHTML = "";
   dataIuran
@@ -35,12 +34,14 @@ function renderTabel(filter = "") {
   renderRekap();
 }
 
-// Render Rekap
 function renderRekap() {
   let total = dataIuran
     .filter(d => d.status === "Sudah Bayar")
     .reduce((sum, d) => sum + parseInt(d.jumlah), 0);
   totalKas.textContent = total.toLocaleString();
+
+  totalSudah.textContent = dataIuran.filter(d => d.status === "Sudah Bayar").length;
+  totalBelum.textContent = dataIuran.filter(d => d.status === "Belum Bayar").length;
 
   let bulanData = Array(12).fill(0);
   dataIuran.forEach(d => {
@@ -57,7 +58,7 @@ function renderRekap() {
     data: {
       labels: ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"],
       datasets: [{
-        label: "Total Kas per Bulan",
+        label: "Kas per Bulan",
         data: bulanData,
         backgroundColor: "#2563eb"
       }]
@@ -69,7 +70,6 @@ function renderRekap() {
   });
 }
 
-// Tambah/Edit Data
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = {
@@ -95,7 +95,6 @@ form.addEventListener("submit", (e) => {
   renderTabel();
 });
 
-// Edit Data
 function editData(index) {
   const d = dataIuran[index];
   document.getElementById("tanggal").value = d.tanggal;
@@ -108,12 +107,9 @@ function editData(index) {
   document.getElementById("formTitle").textContent = "Edit Data Iuran";
   document.getElementById("submitBtn").textContent = "Simpan Perubahan";
   document.getElementById("cancelEdit").classList.remove("hidden");
-
-  // pindah ke form
   showPage("form");
 }
 
-// Hapus Data
 function hapusData(index) {
   if (confirm("Yakin hapus data ini?")) {
     dataIuran.splice(index, 1);
@@ -121,12 +117,10 @@ function hapusData(index) {
   }
 }
 
-// Simpan ke localStorage
 function simpanData() {
   localStorage.setItem("kasData", JSON.stringify(dataIuran));
 }
 
-// Cancel Edit
 document.getElementById("cancelEdit").addEventListener("click", () => {
   form.reset();
   document.getElementById("editIndex").value = "";
@@ -135,7 +129,6 @@ document.getElementById("cancelEdit").addEventListener("click", () => {
   document.getElementById("cancelEdit").classList.add("hidden");
 });
 
-// Pencarian
 searchInput.addEventListener("input", (e) => {
   renderTabel(e.target.value);
 });

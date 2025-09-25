@@ -1,23 +1,19 @@
 let dataIuran = [];
-let total = 0;
 
 const form = document.getElementById("iuranForm");
 const tabel = document.querySelector("#tabelIuran tbody");
-const totalSpan = document.getElementById("total");
 
 form.addEventListener("submit", function(e) {
   e.preventDefault();
 
-  // Ambil data input
+  // Ambil data dari form
+  const tanggal = document.getElementById("tanggal").value;
   const nama = document.getElementById("nama").value;
-  const jumlah = parseInt(document.getElementById("jumlah").value);
-  const tanggal = new Date().toLocaleDateString("id-ID");
+  const bulan = document.getElementById("bulan").value;
+  const status = document.getElementById("status").value;
 
-  // Tambahkan ke array
-  dataIuran.push({ nama, jumlah, tanggal });
-
-  // Update total
-  total += jumlah;
+  // Simpan ke array
+  dataIuran.push({ tanggal, nama, bulan, status });
 
   // Update tabel
   renderTable();
@@ -32,12 +28,14 @@ function renderTable() {
     const row = `
       <tr>
         <td>${index + 1}</td>
-        <td>${item.nama}</td>
-        <td>${item.jumlah.toLocaleString("id-ID")}</td>
         <td>${item.tanggal}</td>
+        <td>${item.nama}</td>
+        <td>${item.bulan}</td>
+        <td class="${item.status === 'Sudah Bayar' ? 'status-sudah' : 'status-belum'}">
+          ${item.status}
+        </td>
       </tr>
     `;
     tabel.innerHTML += row;
   });
-  totalSpan.textContent = total.toLocaleString("id-ID");
 }

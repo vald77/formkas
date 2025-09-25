@@ -176,3 +176,12 @@ tr:hover {
   color: #16a34a;
   font-weight: bold;
 }
+.page.hidden {
+  display: none;
+}
+
+.sidebar nav a.active {
+  background: #2563eb;
+  color: #fff;
+}
+

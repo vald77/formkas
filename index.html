@@ -17,11 +17,35 @@
     <section class="form-section">
       <h2>Tambah Data Iuran</h2>
       <form id="iuranForm">
-        <label>Nama Anggota:</label>
+        <label for="tanggal">Tanggal:</label>
+        <input type="date" id="tanggal" required>
+
+        <label for="nama">Nama Anggota:</label>
         <input type="text" id="nama" required>
 
-        <label>Jumlah Iuran (Rp):</label>
-        <input type="number" id="jumlah" required>
+        <label for="bulan">Bulan Pembayaran:</label>
+        <select id="bulan" required>
+          <option value="">-- Pilih Bulan --</option>
+          <option>Januari</option>
+          <option>Februari</option>
+          <option>Maret</option>
+          <option>April</option>
+          <option>Mei</option>
+          <option>Juni</option>
+          <option>Juli</option>
+          <option>Agustus</option>
+          <option>September</option>
+          <option>Oktober</option>
+          <option>November</option>
+          <option>Desember</option>
+        </select>
+
+        <label for="status">Status:</label>
+        <select id="status" required>
+          <option value="">-- Pilih Status --</option>
+          <option>Sudah Bayar</option>
+          <option>Belum Bayar</option>
+        </select>
 
         <button type="submit">Tambah</button>
       </form>
@@ -34,16 +58,16 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>Nama</th>
-            <th>Jumlah (Rp)</th>
             <th>Tanggal</th>
+            <th>Nama</th>
+            <th>Bulan</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Data akan ditambahkan otomatis -->
+          <!-- Data otomatis diisi JS -->
         </tbody>
       </table>
-      <p><b>Total Iuran: Rp <span id="total">0</span></b></p>
     </section>
   </main>
 

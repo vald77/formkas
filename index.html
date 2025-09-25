@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aplikasi Kas STM</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="layout">
@@ -12,58 +13,60 @@
     <aside class="sidebar">
       <div class="brand">💰 Kas STM</div>
       <nav>
-        <a href="#form">➕ Tambah Data</a>
-        <a href="#tabel">📋 Daftar Iuran</a>
-        <a href="#rekap">📊 Rekap Kas</a>
+        <a href="#" data-target="form">➕ Tambah Data</a>
+        <a href="#" data-target="tabel">📋 Daftar Iuran</a>
+        <a href="#" data-target="rekap">📊 Rekap Kas</a>
       </nav>
     </aside>
 
-    <!-- Konten Utama -->
+    <!-- Main Content -->
     <div class="content">
       <header class="header">
         <h1>Aplikasi Catatan Kas</h1>
-        <p>Kelola iuran STM secara profesional</p>
+        <p>Kelola iuran STM dengan mudah & profesional</p>
       </header>
 
-      <main class="main">
+      <main>
         <!-- Form Input -->
-        <section id="form" class="card">
+        <section id="form" class="card page">
           <h2 id="formTitle">Tambah Data Iuran</h2>
           <form id="iuranForm" class="form-grid">
             <input type="hidden" id="editIndex">
 
-            <label for="tanggal">Tanggal</label>
-            <input type="date" id="tanggal" required>
+            <div>
+              <label for="tanggal">📅 Tanggal</label>
+              <input type="date" id="tanggal" required>
+            </div>
 
-            <label for="nama">Nama Anggota</label>
-            <input type="text" id="nama" required placeholder="Masukkan nama">
+            <div>
+              <label for="nama">👤 Nama Anggota</label>
+              <input type="text" id="nama" required placeholder="Masukkan nama">
+            </div>
 
-            <label for="bulan">Bulan Pembayaran</label>
-            <select id="bulan" required>
-              <option value="">-- Pilih Bulan --</option>
-              <option>Januari</option>
-              <option>Februari</option>
-              <option>Maret</option>
-              <option>April</option>
-              <option>Mei</option>
-              <option>Juni</option>
-              <option>Juli</option>
-              <option>Agustus</option>
-              <option>September</option>
-              <option>Oktober</option>
-              <option>November</option>
-              <option>Desember</option>
-            </select>
+            <div>
+              <label for="bulan">📆 Bulan Pembayaran</label>
+              <select id="bulan" required>
+                <option value="">-- Pilih Bulan --</option>
+                <option>Januari</option><option>Februari</option><option>Maret</option>
+                <option>April</option><option>Mei</option><option>Juni</option>
+                <option>Juli</option><option>Agustus</option><option>September</option>
+                <option>Oktober</option><option>November</option><option>Desember</option>
+              </select>
+            </div>
 
-            <label for="jumlah">Jumlah Pembayaran (Rp)</label>
-            <input type="number" id="jumlah" required min="0">
+            <div>
+              <label for="jumlah">💵 Jumlah Pembayaran (Rp)</label>
+              <input type="number" id="jumlah" required min="0">
+            </div>
 
-            <label for="status">Status</label>
-            <select id="status" required>
-              <option value="">-- Pilih Status --</option>
-              <option>Sudah Bayar</option>
-              <option>Belum Bayar</option>
-            </select>
+            <div>
+              <label for="status">✅ Status</label>
+              <select id="status" required>
+                <option value="">-- Pilih Status --</option>
+                <option>Sudah Bayar</option>
+                <option>Belum Bayar</option>
+              </select>
+            </div>
 
             <div class="form-actions">
               <button type="submit" id="submitBtn" class="btn primary">Tambah Data</button>
@@ -72,8 +75,8 @@
           </form>
         </section>
 
-        <!-- Tabel Data -->
-        <section id="tabel" class="card">
+        <!-- Table -->
+        <section id="tabel" class="card page hidden">
           <div class="card-header">
             <h2>Daftar Iuran</h2>
             <input type="text" id="searchInput" placeholder="🔍 Cari nama...">
@@ -92,18 +95,20 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Data akan muncul dari script.js -->
+                <!-- Data dari JS -->
               </tbody>
             </table>
           </div>
         </section>
 
         <!-- Rekap Kas -->
-        <section id="rekap" class="card">
+        <section id="rekap" class="card page hidden">
           <h2>Rekap Kas</h2>
-          <p>💵 Total Kas: <b>Rp <span id="totalKas">0</span></b></p>
+          <div class="rekap-total">
+            💰 Total Kas: <b>Rp <span id="totalKas">0</span></b>
+          </div>
           <h3>Rekap Per Bulan</h3>
-          <ul id="rekapBulan"></ul>
+          <canvas id="rekapChart" height="100"></canvas>
         </section>
       </main>
     </div>

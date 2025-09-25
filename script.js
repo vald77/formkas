@@ -110,29 +110,3 @@ searchInput.addEventListener("keyup", () => {
 });
 
 renderTabel();
-
-// Navigasi SPA
-const navLinks = document.querySelectorAll(".sidebar nav a");
-const pages = document.querySelectorAll(".page");
-
-navLinks.forEach(link => {
-  link.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    // Hilangkan semua halaman
-    pages.forEach(page => page.classList.add("hidden"));
-
-    // Hapus active di semua link
-    navLinks.forEach(l => l.classList.remove("active"));
-
-    // Tampilkan halaman target
-    const target = link.getAttribute("data-target");
-    document.getElementById(target).classList.remove("hidden");
-
-    // Tandai link aktif
-    link.classList.add("active");
-  });
-});
-
-// Default tampilkan form
-document.querySelector(".sidebar nav a[data-target='form']").classList.add("active");

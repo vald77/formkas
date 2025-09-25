@@ -1,95 +1,76 @@
-let dataIuran = [];
-let totalKas = 0;
-let rekapPerBulan = {};
+let dataIuran = JSON.parse(localStorage.getItem("dataIuran")) || [];
 
 const form = document.getElementById("iuranForm");
-const tabel = document.querySelector("#tabelIuran tbody");
+const tabelBody = document.querySelector("#tabelIuran tbody");
 const totalKasEl = document.getElementById("totalKas");
 const rekapBulanEl = document.getElementById("rekapBulan");
 const searchInput = document.getElementById("searchInput");
-const formTitle = document.getElementById("formTitle");
-const submitBtn = document.getElementById("submitBtn");
-const cancelEdit = document.getElementById("cancelEdit");
-let editIndex = null;
+const cancelEditBtn = document.getElementById("cancelEdit");
 
-// Submit Form
-form.addEventListener("submit", function(e) {
+function renderTabel() {
+  tabelBody.innerHTML = "";
+  let total = 0;
+  let rekapBulan = {};
+
+  dataIuran.forEach((item, index) => {
+    let tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${item.tanggal}</td>
+      <td>${item.nama}</td>
+      <td>${item.bulan}</td>
+      <td>Rp ${item.jumlah.toLocaleString()}</td>
+      <td>${item.status}</td>
+      <td>
+        <button onclick="editData(${index})">✏️ Edit</button>
+        <button onclick="hapusData(${index})">🗑️ Hapus</button>
+      </td>
+    `;
+
+    tabelBody.appendChild(tr);
+
+    if (item.status === "Sudah Bayar") {
+      total += item.jumlah;
+      rekapBulan[item.bulan] = (rekapBulan[item.bulan] || 0) + item.jumlah;
+    }
+  });
+
+  totalKasEl.textContent = total.toLocaleString();
+
+  rekapBulanEl.innerHTML = "";
+  for (let bulan in rekapBulan) {
+    let li = document.createElement("li");
+    li.textContent = `${bulan}: Rp ${rekapBulan[bulan].toLocaleString()}`;
+    rekapBulanEl.appendChild(li);
+  }
+
+  localStorage.setItem("dataIuran", JSON.stringify(dataIuran));
+}
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
-
   const tanggal = document.getElementById("tanggal").value;
   const nama = document.getElementById("nama").value;
   const bulan = document.getElementById("bulan").value;
   const jumlah = parseInt(document.getElementById("jumlah").value);
   const status = document.getElementById("status").value;
+  const editIndex = document.getElementById("editIndex").value;
 
-  if (editIndex !== null) {
-    // Mode edit
-    dataIuran[editIndex] = { tanggal, nama, bulan, jumlah, status };
-    resetForm();
-  } else {
-    // Mode tambah
+  if (editIndex === "") {
     dataIuran.push({ tanggal, nama, bulan, jumlah, status });
+  } else {
+    dataIuran[editIndex] = { tanggal, nama, bulan, jumlah, status };
+    document.getElementById("formTitle").textContent = "Tambah Data Iuran";
+    document.getElementById("submitBtn").textContent = "Tambah Data";
+    cancelEditBtn.classList.add("hidden");
   }
 
-  updateData();
   form.reset();
+  document.getElementById("editIndex").value = "";
+  renderTabel();
 });
 
-// Render tabel
-function renderTable(filteredData = null) {
-  const dataToRender = filteredData || dataIuran;
-  tabel.innerHTML = "";
-
-  dataToRender.forEach((item, index) => {
-    const row = `
-      <tr>
-        <td>${index + 1}</td>
-        <td>${item.tanggal}</td>
-        <td>${item.nama}</td>
-        <td>${item.bulan}</td>
-        <td>${item.jumlah.toLocaleString("id-ID")}</td>
-        <td class="${item.status === 'Sudah Bayar' ? 'status-sudah' : 'status-belum'}">
-          ${item.status}
-        </td>
-        <td>
-          <button class="table-btn btn-edit" onclick="editData(${index})">Edit</button>
-          <button class="table-btn btn-delete" onclick="deleteData(${index})">Hapus</button>
-        </td>
-      </tr>
-    `;
-    tabel.innerHTML += row;
-  });
-}
-
-// Update data (total kas + rekap)
-function updateData() {
-  totalKas = 0;
-  rekapPerBulan = {};
-
-  dataIuran.forEach(item => {
-    if (item.status === "Sudah Bayar") {
-      totalKas += item.jumlah;
-      if (!rekapPerBulan[item.bulan]) rekapPerBulan[item.bulan] = 0;
-      rekapPerBulan[item.bulan] += item.jumlah;
-    }
-  });
-
-  renderTable();
-  renderRekap();
-  totalKasEl.textContent = totalKas.toLocaleString("id-ID");
-}
-
-// Render rekap per bulan
-function renderRekap() {
-  rekapBulanEl.innerHTML = "";
-  for (const bulan in rekapPerBulan) {
-    rekapBulanEl.innerHTML += `
-      <li><b>${bulan}</b>: Rp ${rekapPerBulan[bulan].toLocaleString("id-ID")}</li>
-    `;
-  }
-}
-
-// Edit data
 function editData(index) {
   const item = dataIuran[index];
   document.getElementById("tanggal").value = item.tanggal;
@@ -97,51 +78,35 @@ function editData(index) {
   document.getElementById("bulan").value = item.bulan;
   document.getElementById("jumlah").value = item.jumlah;
   document.getElementById("status").value = item.status;
+  document.getElementById("editIndex").value = index;
 
-  editIndex = index;
-  formTitle.textContent = "✏️ Edit Data Iuran";
-  submitBtn.textContent = "Simpan Perubahan";
-  cancelEdit.classList.remove("hidden");
+  document.getElementById("formTitle").textContent = "Edit Data Iuran";
+  document.getElementById("submitBtn").textContent = "Update Data";
+  cancelEditBtn.classList.remove("hidden");
 }
 
-// Cancel edit
-cancelEdit.addEventListener("click", resetForm);
-
-function resetForm() {
-  editIndex = null;
-  formTitle.textContent = "Tambah Data Iuran";
-  submitBtn.textContent = "Tambah Data";
-  cancelEdit.classList.add("hidden");
+cancelEditBtn.addEventListener("click", () => {
   form.reset();
-}
+  document.getElementById("editIndex").value = "";
+  document.getElementById("formTitle").textContent = "Tambah Data Iuran";
+  document.getElementById("submitBtn").textContent = "Tambah Data";
+  cancelEditBtn.classList.add("hidden");
+});
 
-// Hapus data
-function deleteData(index) {
-  if (confirm("Yakin ingin menghapus data ini?")) {
+function hapusData(index) {
+  if (confirm("Yakin mau hapus data ini?")) {
     dataIuran.splice(index, 1);
-    updateData();
+    renderTabel();
   }
 }
 
-// Pencarian
-searchInput.addEventListener("input", function() {
-  const keyword = this.value.toLowerCase();
-  const filtered = dataIuran.filter(item => 
-    item.nama.toLowerCase().includes(keyword)
-  );
-  renderTable(filtered);
+searchInput.addEventListener("keyup", () => {
+  const filter = searchInput.value.toLowerCase();
+  const rows = tabelBody.querySelectorAll("tr");
+  rows.forEach(row => {
+    const nama = row.cells[2].textContent.toLowerCase();
+    row.style.display = nama.includes(filter) ? "" : "none";
+  });
 });
 
-// Export CSV
-function exportCSV() {
-  let csv = "Tanggal,Nama,Bulan,Jumlah,Status\n";
-  dataIuran.forEach(item => {
-    csv += `${item.tanggal},${item.nama},${item.bulan},${item.jumlah},${item.status}\n`;
-  });
-
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "data_kas.csv";
-  link.click();
-}
+renderTabel();

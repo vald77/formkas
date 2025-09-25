@@ -1,139 +1,142 @@
 /* Reset */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* Layout utama */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f4f7fb;
+  background: #f4f6f9;
   color: #333;
-}
-
-.layout {
   display: flex;
   min-height: 100vh;
 }
 
+/* Layout */
+.layout {
+  display: flex;
+  width: 100%;
+}
+
 /* Sidebar */
 .sidebar {
-  width: 240px;
-  background: linear-gradient(180deg, #1e3c72, #2a5298);
+  width: 230px;
+  background: #1e293b;
   color: #fff;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  padding: 20px;
 }
 
 .sidebar .brand {
-  font-size: 22px;
+  font-size: 1.6rem;
   font-weight: bold;
   margin-bottom: 30px;
-  text-align: center;
 }
 
-.nav a {
+.sidebar nav a {
   display: block;
-  color: #fff;
-  padding: 12px 15px;
+  padding: 12px;
+  margin: 5px 0;
+  color: #cbd5e1;
   text-decoration: none;
   border-radius: 6px;
-  margin-bottom: 8px;
   transition: background 0.3s;
 }
 
-.nav a:hover {
-  background: rgba(255, 255, 255, 0.2);
+.sidebar nav a:hover {
+  background: #334155;
+  color: #fff;
 }
 
 /* Content */
 .content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  padding: 25px;
 }
 
 .header {
-  background: linear-gradient(90deg, #1e3c72, #2a5298);
-  color: #fff;
-  padding: 20px;
-  border-bottom: 4px solid #1e3c72;
+  margin-bottom: 20px;
 }
 
-.main {
-  flex: 1;
-  padding: 20px;
+.header h1 {
+  font-size: 1.8rem;
+  color: #1e293b;
+}
+
+.header p {
+  color: #475569;
 }
 
 /* Card */
 .card {
   background: #fff;
+  border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.card h2 {
   margin-bottom: 15px;
+  color: #1e293b;
 }
 
 /* Form */
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   gap: 15px;
 }
 
 .form-grid label {
-  font-weight: 600;
-  margin-bottom: 5px;
-  display: block;
+  font-weight: 500;
+  color: #334155;
 }
 
 input, select {
-  padding: 10px;
-  border: 1px solid #ddd;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
   border-radius: 6px;
-  width: 100%;
+  font-size: 14px;
 }
 
-.full-width {
+.form-actions {
   grid-column: span 2;
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-/* Buttons */
 .btn {
-  padding: 10px 15px;
-  border-radius: 6px;
+  padding: 8px 15px;
   border: none;
+  border-radius: 6px;
+  font-size: 14px;
   cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
 }
 
 .btn.primary {
-  background: #1e3c72;
-  color: #fff;
+  background: #3b82f6;
+  color: white;
+}
+
+.btn.primary:hover {
+  background: #2563eb;
 }
 
 .btn.secondary {
-  background: #6c757d;
-  color: #fff;
+  background: #94a3b8;
+  color: white;
 }
 
-.btn.success {
-  background: #28a745;
-  color: #fff;
+.btn.secondary:hover {
+  background: #64748b;
 }
 
-.btn:hover {
-  opacity: 0.85;
+.hidden {
+  display: none;
 }
 
 /* Table */
@@ -148,76 +151,28 @@ table {
 }
 
 th, td {
-  padding: 12px;
+  padding: 10px;
   text-align: center;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  background: #3b82f6;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background: #f8fafc;
 }
 
 tr:hover {
-  background: #f9f9f9;
-}
-
-.status-sudah {
-  color: #28a745;
-  font-weight: bold;
-}
-
-.status-belum {
-  color: #dc3545;
-  font-weight: bold;
+  background: #f1f5f9;
 }
 
 /* Rekap */
 .rekap-total {
-  background: #e8f4ff;
-  padding: 15px;
-  border-radius: 6px;
-  font-size: 16px;
+  font-size: 1.2rem;
   margin-bottom: 10px;
-}
-
-#rekapBulan li {
-  padding: 6px 0;
-  border-bottom: 1px solid #eee;
-  font-size: 14px;
-}
-
-/* Tombol kecil di tabel */
-.table-btn {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-.btn-edit {
-  background: #ffc107;
-  color: #000;
-}
-
-.btn-delete {
-  background: #dc3545;
-  color: #fff;
-}
-
-.btn-edit:hover {
-  background: #e0a800;
-}
-
-.btn-delete:hover {
-  background: #c82333;
-}
-
-/* Search */
-#searchInput {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  margin-right: 8px;
-}
-
-/* Utility */
-.hidden {
-  display: none;
+  color: #16a34a;
+  font-weight: bold;
 }

@@ -12,9 +12,9 @@
     <aside class="sidebar">
       <div class="brand">💰 Kas STM</div>
       <nav>
-        <a href="#" data-target="form">➕ Tambah Data</a>
-        <a href="#" data-target="tabel">📋 Daftar Iuran</a>
-        <a href="#" data-target="rekap">📊 Rekap Kas</a>
+        <a href="#form">➕ Tambah Data</a>
+        <a href="#tabel">📋 Daftar Iuran</a>
+        <a href="#rekap">📊 Rekap Kas</a>
       </nav>
     </aside>
 
@@ -27,7 +27,7 @@
 
       <main>
         <!-- Form Input -->
-        <section id="form" class="card page">
+        <section id="form" class="card">
           <h2 id="formTitle">Tambah Data Iuran</h2>
           <form id="iuranForm" class="form-grid">
             <input type="hidden" id="editIndex">
@@ -46,10 +46,18 @@
               <label for="bulan">📆 Bulan Pembayaran</label>
               <select id="bulan" required>
                 <option value="">-- Pilih Bulan --</option>
-                <option>Januari</option><option>Februari</option><option>Maret</option>
-                <option>April</option><option>Mei</option><option>Juni</option>
-                <option>Juli</option><option>Agustus</option><option>September</option>
-                <option>Oktober</option><option>November</option><option>Desember</option>
+                <option>Januari</option>
+                <option>Februari</option>
+                <option>Maret</option>
+                <option>April</option>
+                <option>Mei</option>
+                <option>Juni</option>
+                <option>Juli</option>
+                <option>Agustus</option>
+                <option>September</option>
+                <option>Oktober</option>
+                <option>November</option>
+                <option>Desember</option>
               </select>
             </div>
 
@@ -75,7 +83,7 @@
         </section>
 
         <!-- Table -->
-        <section id="tabel" class="card page hidden">
+        <section id="tabel" class="card">
           <div class="card-header">
             <h2>Daftar Iuran</h2>
             <input type="text" id="searchInput" placeholder="🔍 Cari nama...">
@@ -94,14 +102,14 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Data dari JS -->
+                <!-- Data muncul dari JS -->
               </tbody>
             </table>
           </div>
         </section>
 
         <!-- Rekap Kas -->
-        <section id="rekap" class="card page hidden">
+        <section id="rekap" class="card">
           <h2>Rekap Kas</h2>
           <div class="rekap-total">
             💰 Total Kas: <b>Rp <span id="totalKas">0</span></b>

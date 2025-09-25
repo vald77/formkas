@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aplikasi Kas STM</title>
-  <!-- Panggil CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,58 +11,71 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="brand">💰 Kas STM</div>
-      <nav class="nav">
+      <nav>
         <a href="#form">➕ Tambah Data</a>
         <a href="#tabel">📋 Daftar Iuran</a>
         <a href="#rekap">📊 Rekap Kas</a>
       </nav>
     </aside>
 
-    <!-- Konten Utama -->
+    <!-- Main Content -->
     <div class="content">
-      <!-- Header -->
       <header class="header">
         <h1>Aplikasi Catatan Kas</h1>
-        <p>Kelola iuran STM secara profesional</p>
+        <p>Kelola iuran STM dengan mudah & profesional</p>
       </header>
 
-      <main class="main">
-        <!-- Form -->
+      <main>
+        <!-- Form Input -->
         <section id="form" class="card">
           <h2 id="formTitle">Tambah Data Iuran</h2>
           <form id="iuranForm" class="form-grid">
             <input type="hidden" id="editIndex">
+
             <div>
-              <label for="tanggal">Tanggal</label>
+              <label for="tanggal">📅 Tanggal</label>
               <input type="date" id="tanggal" required>
             </div>
+
             <div>
-              <label for="nama">Nama Anggota</label>
-              <input type="text" id="nama" placeholder="Masukkan nama" required>
+              <label for="nama">👤 Nama Anggota</label>
+              <input type="text" id="nama" required placeholder="Masukkan nama">
             </div>
+
             <div>
-              <label for="bulan">Bulan Pembayaran</label>
+              <label for="bulan">📆 Bulan Pembayaran</label>
               <select id="bulan" required>
                 <option value="">-- Pilih Bulan --</option>
-                <option>Januari</option><option>Februari</option><option>Maret</option>
-                <option>April</option><option>Mei</option><option>Juni</option>
-                <option>Juli</option><option>Agustus</option><option>September</option>
-                <option>Oktober</option><option>November</option><option>Desember</option>
+                <option>Januari</option>
+                <option>Februari</option>
+                <option>Maret</option>
+                <option>April</option>
+                <option>Mei</option>
+                <option>Juni</option>
+                <option>Juli</option>
+                <option>Agustus</option>
+                <option>September</option>
+                <option>Oktober</option>
+                <option>November</option>
+                <option>Desember</option>
               </select>
             </div>
+
             <div>
-              <label for="jumlah">Jumlah Pembayaran (Rp)</label>
+              <label for="jumlah">💵 Jumlah Pembayaran (Rp)</label>
               <input type="number" id="jumlah" required min="0">
             </div>
+
             <div>
-              <label for="status">Status</label>
+              <label for="status">✅ Status</label>
               <select id="status" required>
                 <option value="">-- Pilih Status --</option>
                 <option>Sudah Bayar</option>
                 <option>Belum Bayar</option>
               </select>
             </div>
-            <div class="full-width actions">
+
+            <div class="form-actions">
               <button type="submit" id="submitBtn" class="btn primary">Tambah Data</button>
               <button type="button" id="cancelEdit" class="btn secondary hidden">Batal Edit</button>
             </div>
@@ -74,10 +86,7 @@
         <section id="tabel" class="card">
           <div class="card-header">
             <h2>Daftar Iuran</h2>
-            <div>
-              <input type="text" id="searchInput" placeholder="🔍 Cari nama..." />
-              <button onclick="exportCSV()" class="btn success">⬇️ Export CSV</button>
-            </div>
+            <input type="text" id="searchInput" placeholder="🔍 Cari nama...">
           </div>
           <div class="table-wrapper">
             <table id="tabelIuran">
@@ -93,17 +102,17 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Data otomatis dari JS -->
+                <!-- Data muncul dari JS -->
               </tbody>
             </table>
           </div>
         </section>
 
-        <!-- Rekap -->
+        <!-- Rekap Kas -->
         <section id="rekap" class="card">
           <h2>Rekap Kas</h2>
           <div class="rekap-total">
-            💵 Total Kas: <b>Rp <span id="totalKas">0</span></b>
+            💰 Total Kas: <b>Rp <span id="totalKas">0</span></b>
           </div>
           <h3>Rekap Per Bulan</h3>
           <ul id="rekapBulan"></ul>
@@ -112,7 +121,6 @@
     </div>
   </div>
 
-  <!-- Panggil JS -->
   <script src="script.js"></script>
 </body>
 </html>

@@ -22,8 +22,8 @@
     <!-- Main Content -->
     <div class="content">
       <header class="header">
-        <h1>Aplikasi Catatan Kas</h1>
-        <p>Kelola iuran STM dengan mudah & profesional</p>
+        <h1>Aplikasi Catatan Kas STM</h1>
+        <p>Kelola keuangan kas secara mudah, cepat, dan transparan</p>
       </header>
 
       <main>
@@ -104,8 +104,19 @@
         <!-- Rekap Kas -->
         <section id="rekap" class="card page hidden">
           <h2>Rekap Kas</h2>
-          <div class="rekap-total">
-            💰 Total Kas: <b>Rp <span id="totalKas">0</span></b>
+          <div class="rekap-cards">
+            <div class="rekap-card total">
+              <h3>Total Kas</h3>
+              <p>Rp <span id="totalKas">0</span></p>
+            </div>
+            <div class="rekap-card paid">
+              <h3>Sudah Bayar</h3>
+              <p><span id="totalSudah">0</span> data</p>
+            </div>
+            <div class="rekap-card unpaid">
+              <h3>Belum Bayar</h3>
+              <p><span id="totalBelum">0</span> data</p>
+            </div>
           </div>
           <h3>Rekap Per Bulan</h3>
           <canvas id="rekapChart" height="100"></canvas>

@@ -3,82 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catatan Iuran Kas</title>
+  <title>Aplikasi Kas STM</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>📒 Catatan Iuran Kas</h1>
-    <p>Kelola daftar iuran STM / Kas dengan mudah</p>
-  </header>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>💰 Kas STM</h2>
+      <nav>
+        <a href="#form">➕ Tambah Data</a>
+        <a href="#tabel">📋 Daftar Iuran</a>
+        <a href="#rekap">📊 Rekap Kas</a>
+      </nav>
+    </aside>
 
-  <main>
-    <!-- Form Input -->
-    <section class="form-section">
-      <h2>Tambah Data Iuran</h2>
-      <form id="iuranForm">
-        <label for="tanggal">Tanggal:</label>
-        <input type="date" id="tanggal" required>
+    <!-- Konten Utama -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="app-header">
+        <h1>📒Catatan Kas</h1>
+        <p>STM CS DPRD SUMUTt</p>
+      </header>
 
-        <label for="nama">Nama Anggota:</label>
-        <input type="text" id="nama" required>
+      <!-- Form Input -->
+      <section id="form" class="card">
+        <h2 id="formTitle">Tambah Data Iuran</h2>
+        <form id="iuranForm" class="form-grid">
+          <input type="hidden" id="editIndex">
+          <div>
+            <label for="tanggal">Tanggal:</label>
+            <input type="date" id="tanggal" required>
+          </div>
+          <div>
+            <label for="nama">Nama Anggota:</label>
+            <input type="text" id="nama" placeholder="Masukkan nama" required>
+          </div>
+          <div>
+            <label for="bulan">Bulan Pembayaran:</label>
+            <select id="bulan" required>
+              <option value="">-- Pilih Bulan --</option>
+              <option>Januari</option><option>Februari</option><option>Maret</option>
+              <option>April</option><option>Mei</option><option>Juni</option>
+              <option>Juli</option><option>Agustus</option><option>September</option>
+              <option>Oktober</option><option>November</option><option>Desember</option>
+            </select>
+          </div>
+          <div>
+            <label for="jumlah">Jumlah Pembayaran (Rp):</label>
+            <input type="number" id="jumlah" required min="0">
+          </div>
+          <div>
+            <label for="status">Status:</label>
+            <select id="status" required>
+              <option value="">-- Pilih Status --</option>
+              <option>Sudah Bayar</option>
+              <option>Belum Bayar</option>
+            </select>
+          </div>
+          <div class="full-width">
+            <button type="submit" id="submitBtn">Tambah Data</button>
+            <button type="button" id="cancelEdit" class="hidden">Batal Edit</button>
+          </div>
+        </form>
+      </section>
 
-        <label for="bulan">Bulan Pembayaran:</label>
-        <select id="bulan" required>
-          <option value="">-- Pilih Bulan --</option>
-          <option>Januari</option>
-          <option>Februari</option>
-          <option>Maret</option>
-          <option>April</option>
-          <option>Mei</option>
-          <option>Juni</option>
-          <option>Juli</option>
-          <option>Agustus</option>
-          <option>September</option>
-          <option>Oktober</option>
-          <option>November</option>
-          <option>Desember</option>
-        </select>
+      <!-- Tabel Data -->
+      <section id="tabel" class="card">
+        <h2>Daftar Iuran</h2>
+        <input type="text" id="searchInput" placeholder="🔍 Cari nama..." />
+        <button onclick="exportCSV()">⬇️ Export CSV</button>
+        <table id="tabelIuran">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Tanggal</th>
+              <th>Nama</th>
+              <th>Bulan</th>
+              <th>Jumlah (Rp)</th>
+              <th>Status</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Data otomatis diisi JS -->
+          </tbody>
+        </table>
+      </section>
 
-        <label for="jumlah">Jumlah Pembayaran (Rp):</label>
-        <input type="number" id="jumlah" required min="0">
-
-        <label for="status">Status:</label>
-        <select id="status" required>
-          <option value="">-- Pilih Status --</option>
-          <option>Sudah Bayar</option>
-          <option>Belum Bayar</option>
-        </select>
-
-        <button type="submit">Tambah</button>
-      </form>
-    </section>
-
-    <!-- Tabel Data -->
-    <section class="table-section">
-      <h2>Daftar Iuran</h2>
-      <table id="tabelIuran">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Tanggal</th>
-            <th>Nama</th>
-            <th>Bulan</th>
-            <th>Jumlah (Rp)</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Data otomatis diisi JS -->
-        </tbody>
-      </table>
-      <p><b>Total Kas Terkumpul: Rp <span id="totalKas">0</span></b></p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Catatan Iuran STM</p>
-  </footer>
+      <!-- Rekap Data -->
+      <section id="rekap" class="card">
+        <h2>Rekap Kas</h2>
+        <p><b>Total Kas Terkumpul: Rp <span id="totalKas">0</span></b></p>
+        <h3>Rekap Per Bulan</h3>
+        <ul id="rekapBulan">
+          <!-- Rekap otomatis diisi JS -->
+        </ul>
+      </section>
+    </main>
+  </div>
 
   <script src="script.js"></script>
 </body>

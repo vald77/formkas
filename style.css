@@ -564,3 +564,35 @@ tbody tr:hover {
     padding: 12px;
   }
 }
+
+/* --- Form Responsive untuk HP --- */
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr; /* jadi 1 kolom */
+    gap: 12px;
+    text-align: left;
+  }
+
+  .form-grid div {
+    width: 100%;
+  }
+
+  input, select {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+
+  .form-actions {
+    grid-column: span 1;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .btn {
+    width: 100%; /* tombol full width */
+    font-size: 1rem;
+    padding: 12px;
+  }
+}

@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catatan Iuran Kas STM CS DPRDSU</title>
+  <title>Catatan Iuran Kas</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>📒 Catatan Iuran Kas</h1>
-    <p>STM CS DPRD SUMUT</p>
+    <p>Kelola daftar iuran STM / Kas dengan mudah</p>
   </header>
 
   <main>
@@ -40,6 +40,9 @@
           <option>Desember</option>
         </select>
 
+        <label for="jumlah">Jumlah Pembayaran (Rp):</label>
+        <input type="number" id="jumlah" required min="0">
+
         <label for="status">Status:</label>
         <select id="status" required>
           <option value="">-- Pilih Status --</option>
@@ -61,6 +64,7 @@
             <th>Tanggal</th>
             <th>Nama</th>
             <th>Bulan</th>
+            <th>Jumlah (Rp)</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -68,6 +72,7 @@
           <!-- Data otomatis diisi JS -->
         </tbody>
       </table>
+      <p><b>Total Kas Terkumpul: Rp <span id="totalKas">0</span></b></p>
     </section>
   </main>
 

@@ -75,6 +75,11 @@ tr:nth-child(even) {
   font-weight: bold;
 }
 
+p b {
+  font-size: 18px;
+  color: #0077cc;
+}
+
 footer {
   text-align: center;
   background: #333;
